@@ -37,7 +37,7 @@ void postOrder(Node* root) {
 int main(void)
 {
 	int data;
-	while (scanf("%d", &data) != EOF) {
+	while (scanf("%d", &data) != EOF) {		//주목
 		root = insert(root, data);
 	}
 	postOrder(root);
