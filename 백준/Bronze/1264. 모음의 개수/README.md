@@ -1,4 +1,4 @@
-# [Bronze IV] 과자 - 10156 
+# [Bronze IV] 모음의 개수 - 1264 
 
 [문제 링크](https://www.acmicpc.net/problem/1264) 
 
