@@ -1,8 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
+#define ll long long
 
-int n, result = 0;
-vector<int> sumOfTime;
+ll n, result = 0;
+int sumOfTime[1010] = {0}, sum2 = 0;
+vector<int> partialSum;
 
 int main(void)
 {
@@ -11,28 +13,23 @@ int main(void)
 
   int n;
   cin >> n;
-  while (n--)
+  for (int i = 1; i <= n; i++)
   {
-    int amount, temp, sum = 0;
+    int amount, temp;
     cin >> amount;
-    for (int i = 0; i < amount; i++)
+    for (int j = 0; j < amount; j++)
     {
       cin >> temp;
-      sum += temp;
+      sumOfTime[i] += temp;
     }
-    sumOfTime.push_back(sum);
   }
-  sort(sumOfTime.begin(), sumOfTime.end());
 
-  int index = 0;
+  sort(sumOfTime + 1, sumOfTime + 1 + n);
 
-  for (int i = 0; i < sumOfTime.size(); i++)
+  for (int i = 1; i <= n; i++)
   {
-    for (int j = 0; j <= index; j++)
-    {
-      result += sumOfTime[j];
-    }
-    index++;
+    sum2 += sumOfTime[i];
+    result += sum2;
   }
   cout << result << "\n";
 
