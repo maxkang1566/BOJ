@@ -1,77 +1,55 @@
-#define _CRT_SECURE_NO_WARNINGS
-#include <iostream>
-#include <vector>
-#include <queue>
-#include <algorithm>
-#include <memory.h>
+#include <bits/stdc++.h>
 using namespace std;
+int dy[4] = {1, 0, -1, 0};
+int dx[4] = {0, 1, 0, -1};
+int m, n, k, y, x, ret, ny, nx, t;
+int board[51][51];
+bool visited[51][51];
 
-struct Node {
-	int x, y;
-};
-
-queue<Node> q;
-int direct[4][2] = { 1, 0, 0, 1, -1, 0, 0, -1 };
-int map[60][60] = { 0 };
-int M, N, K;
-
-void BFS(int x, int y)
+void dfs(int y, int x)
 {
-	map[x][y] = 0;
-	q.push({ x, y });
+  visited[y][x] = 1;
+  for (int i = 0; i < 4; i++)
+  {
+    ny = y + dy[i];
+    nx = x + dx[i];
+    if (ny < 0 || ny >= n || nx < 0 || nx >= m || board[ny][nx] == 0)
+      continue;
+    if (visited[ny][nx])
+      continue;
 
-	while (!q.empty())
-	{
-		Node now = q.front();
-		q.pop();
-
-		for (int t = 0; t < 4; t++) {
-			int ny = now.y + direct[t][0];
-			int nx = now.x + direct[t][1];
-
-			if (ny < 0 || nx < 0 || ny >= N || nx >= M) continue;
-			if (map[nx][ny] == 0)continue;
-
-			map[nx][ny] = 0;
-			q.push({ nx, ny });
-		}
-	}
+    dfs(ny, nx);
+  }
 }
-void start()
-{
-	int xpos, ypos;
-	int count = 0;
-	cin >> M >> N >> K;
-
-	for (int i = 0; i < K; i++) {
-		cin >> xpos >> ypos;
-		map[xpos][ypos] = 1;
-	}
-
-	for (int y = 0; y < N; y++) {
-		for (int x = 0; x < M; x++) {
-			if (map[x][y] == 1) {
-				BFS(x, y);
-				++count;
-			}
-		}
-	}
-
-	cout << count << '\n';
-	memset(map, 0, sizeof(int) * 60 * 60);
-}
-
 int main(void)
 {
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL);
-	cout.tie(NULL);
+  cin.tie(0);
+  cout.tie(0);
 
-	int T;
-	cin >> T;
-	for (int i = 0; i < T; i++) {
-		start();
-	}
-
-	return 0;
+  cin >> t;
+  while (t--)
+  {
+    fill(&board[0][0], &board[0][0] + 51 * 51, 0);
+    fill(&visited[0][0], &visited[0][0] + 51 * 51, 0);
+    ret = 0;
+    cin >> m >> n >> k;
+    for (int i = 0; i < k; i++)
+    {
+      cin >> x >> y;
+      board[y][x] = 1;
+    }
+    for (int i = 0; i < n; i++)
+    {
+      for (int j = 0; j < m; j++)
+      {
+        if (board[i][j] == 1 && !visited[i][j])
+        {
+          dfs(i, j);
+          ret++;
+        }
+      }
+    }
+    cout << ret << "\n";
+  }
+  return 0;
 }
