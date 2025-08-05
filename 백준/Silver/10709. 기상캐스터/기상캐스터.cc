@@ -1,43 +1,43 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-int h, w;
+int n, m, a[104][104];
+string s;
 int main(void)
 {
   ios::sync_with_stdio(0);
   cin.tie(0);
 
-  cin >> h >> w;
-  vector<string> s(h);
-  vector<vector<int>> ret(h, vector<int>(w, -1));
-  for (int i = 0; i < h; i++)
+  cin >> n >> m;
+  for (int i = 0; i < n; i++)
   {
-    cin >> s[i];
-  }
-
-  for (int i = 0; i < h; i++)
-  {
-    int lastCloudPos = -1;
-    for (int j = 0; j < w; j++)
+    cin >> s;
+    for (int j = 0; j < m; j++)
     {
-      if (s[i][j] == 'c')
+      if (s[j] == '.')
+        a[i][j] = -1;
+      else
+        a[i][j] = 0;
+    }
+  }
+  for (int i = 0; i < n; i++)
+  {
+    for (int j = 0; j < m; j++)
+    {
+      if (a[i][j] == 0)
       {
-        ret[i][j] = 0;
-        lastCloudPos = j;
-      }
-      else if (lastCloudPos != -1)
-      {
-        ret[i][j] = j - lastCloudPos;
+        int cnt = 1;
+        while (a[i][j + 1] == -1)
+        {
+          a[i][j + 1] = cnt++;
+          j++;
+        }
       }
     }
   }
-
-  for (int i = 0; i < h; i++)
+  for (int i = 0; i < n; i++)
   {
-    for (int j = 0; j < w; j++)
-    {
-      cout << ret[i][j] << " ";
-    }
+    for (int j = 0; j < m; j++)
+      cout << a[i][j] << " ";
     cout << "\n";
   }
 }
