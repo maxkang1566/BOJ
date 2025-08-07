@@ -1,48 +1,50 @@
-#include <iostream>
-#include <stack>
-#include <string>
+#include <bits/stdc++.h>
 using namespace std;
 
 int main(void)
 {
-	ios::sync_with_stdio(false);
-	cin.tie(NULL);
+  ios::sync_with_stdio(0);
+  cin.tie(0);
 
-	while (true) {
-		string a;
-		getline(cin, a);
-		if (a == ".") {
-			break;
-		}
-		stack<char> s;
-		bool check = true;
+  while (1)
+  {
+    bool chk = true;
+    string s;
+    stack<char> stk;
+    getline(cin, s);
+    if (s == ".")
+      break;
 
-		for (auto c : a) {
-			if (c == '(' || c == '[')
-				s.push(c);
+    for (char i : s)
+    {
+      if (i == '(' || i == '[')
+        stk.push(i);
+      else if (i == ')')
+      {
+        if (stk.empty() || stk.top() != '(')
+        {
+          chk = false;
+          break;
+        }
+        stk.pop();
+      }
+      else if (i == ']')
+      {
+        if (stk.empty() || stk.top() != '[')
+        {
+          chk = false;
+          break;
+        }
+        stk.pop();
+      }
+    }
+    if (!stk.empty())
+      chk = false;
 
-			if (c == ')') {
-				if (s.empty() || s.top() != '(') {
-					check = false;
-					break;
-				}
-				s.pop();
-			}
-			if (c == ']') {
-				if (s.empty() || s.top() != '[') {
-					check = false;
-					break;
-				}
-				s.pop();
-			}
-		}
-
-		if (!s.empty())
-			check = false;
-		if (check)
-			cout << "yes\n";
-		else
-			cout << "no\n";
-
-	}
+    if (chk)
+      cout << "yes" << "\n";
+    else
+      cout << "no" << "\n";
+  }
+  return 0;
 }
