@@ -7,7 +7,6 @@ int main(void)
   ios::sync_with_stdio(0);
   cin.tie(0);
   cout.tie(0);
-  int star;
 
   cin >> n;
   cin >> pattern;
@@ -27,6 +26,5 @@ int main(void)
         cout << "NE\n";
     }
   }
-
   return 0;
 }
