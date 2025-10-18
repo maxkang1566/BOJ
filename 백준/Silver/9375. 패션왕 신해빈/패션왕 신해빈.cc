@@ -1,31 +1,29 @@
 #include <bits/stdc++.h>
 using namespace std;
-string a, b;
+int tc, n;
+string s1, s2;
 int main(void)
 {
   ios::sync_with_stdio(0);
   cin.tie(0);
   cout.tie(0);
-  int tc;
   cin >> tc;
   while (tc--)
   {
-    map<string, int> _map;
-    int n;
+    map<string, int> mp;
     cin >> n;
     for (int i = 0; i < n; i++)
     {
-      cin >> a >> b;
-      _map[b]++;
+      cin >> s1 >> s2;
+      mp[s2]++;
     }
-    long long ret = 1;
-    for (auto c : _map)
+    long long res = 1;
+    for (auto c : mp)
     {
-      ret *= ((long long)c.second + 1);
+      res *= ((long long)c.second + 1);
     }
-    ret--;
-    cout << ret << "\n";
+    res--;
+    cout << res << "\n";
   }
-
   return 0;
 }
