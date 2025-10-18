@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
-int n, m, res = 0;
-int arr[15003];
+int n, m, arr[15005];
+int ret = 0;
 
 int main(void)
 {
@@ -12,15 +12,11 @@ int main(void)
   for (int i = 0; i < n; i++)
     cin >> arr[i];
 
-  sort(arr, arr + n);
-  for (int i = 0; i < n - 1; i++)
-  {
+  for (int i = 0; i < n; i++)
     for (int j = i + 1; j < n; j++)
-    {
       if (arr[i] + arr[j] == m)
-        res++;
-    }
-  }
-  cout << res << "\n";
+        ret++;
+
+  cout << ret << "\n";
   return 0;
 }
