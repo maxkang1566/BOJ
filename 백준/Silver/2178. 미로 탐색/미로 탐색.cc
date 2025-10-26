@@ -1,9 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 int n, m;
-int dy[4] = {-1, 0, 1, 0};
-int dx[4] = {0, 1, 0, -1};
+int dy[4] = {-1, 0, 1, 0}, dx[4] = {0, 1, 0, -1};
 int board[104][104], visited[104][104], y, x;
+
 int main(void)
 {
   cin >> n >> m;
@@ -14,7 +14,7 @@ int main(void)
   queue<pair<int, int>> q;
   visited[0][0] = 1;
   q.push({0, 0});
-  while (q.size())
+  while (!q.empty())
   {
     tie(y, x) = q.front();
     q.pop();
@@ -22,10 +22,11 @@ int main(void)
     {
       int ny = y + dy[i];
       int nx = x + dx[i];
-      if (ny < 0 || ny >= n || nx < 0 || nx >= m || board[ny][nx] == 0)
+      if (ny < 0 || ny >= n || nx < 0 || nx > m || board[ny][nx] == 0)
         continue;
       if (visited[ny][nx])
         continue;
+
       visited[ny][nx] = visited[y][x] + 1;
       q.push({ny, nx});
     }
